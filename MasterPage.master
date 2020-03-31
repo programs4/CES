@@ -1,0 +1,179 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>CES | Centralized Evaluation System</title>
+   
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/customscroll.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/css/fontAwesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" type="text/css" href="/css/chosen.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.min.css" />
+
+    <script type="text/javascript" src="/js/jquery-1.11.2.min.js"></script>
+
+
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery.bootpag.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="/js/customscroll.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+
+    <%="<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/styles.css\">" %>
+
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="AspnetForm" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <section class="ces-main-holder full-height">
+            <div class="prinNoDisplay">
+                <asp:Panel ID="PnlTemporary" runat="server" Style="display: none;">
+                    <div class="nav-holder">
+                        <div class="menu-logo-holder">
+                            <img src="/images/logo.png" class="img-responsive" />
+                        </div>
+                        <div class="menu-list-holder">
+                            <ul class="main-ul">
+                                <li onclick="location.href='/tools/users/info'" class="has-dropdown">
+                                    <a style="color: white;" href="/tools/users/info">
+                                        <img src="/images/leftmenu/profile.png" />Şəxsi Məlumatlar
+                                    </a>
+                                </li>
+                                <ul class="ces-dropdown">
+
+                                    <asp:Repeater ID="RptUsersPermissionsModules" runat="server">
+                                        <ItemTemplate>
+                                            <li onclick="location.href='<%#Eval("Url")%>'">
+                                                <a href='<%#Eval("Url")%>'>
+                                                    <img src='/images/leftmenu/<%#Eval("ID")%>.png' />
+                                                    <%#Eval("Name")%> 
+                                                </a>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+
+                                    <li class="logout">
+                                        <a href="/logout">
+                                            <img src="/images/leftmenu/logout.png" />Təhlükəsiz çıxış
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </ul>
+                            <div class="copyright">
+                                <p>Bütün hüquqlar qorunur. © 2017</p>
+                                <a href="#">www.ces.az</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-holder">
+                        <div class="main-info-title">
+                            <asp:Literal ID="LtrTitle" runat="server"></asp:Literal>
+                        </div>
+
+                        <div class="main-info-holder">
+
+                            <div class="full-ns">
+                                <p class="institution-n">
+                                    <asp:Literal ID="LtrOrganizations" runat="server">Məlumat Hesablama Mərkəzi</asp:Literal>
+                                </p>
+                                <p class="full-name">
+                                    <asp:Literal ID="LtrFullname" runat="server">Xasıyev Tural Ərzuman Oğlu</asp:Literal>
+                                </p>
+                            </div>
+                            <div class="short-ns">
+                                <asp:Literal ID="LtrSN" runat="server">XT</asp:Literal>
+                            </div>
+                        </div>
+
+                    </div>
+                </asp:Panel>
+            </div>
+            <div class="content">
+                <div class="contentBody">
+                    <div class="contentInner">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </form>
+    <script type="text/javascript" src="/js/lightbox.js"></script>
+    <%-- Kalendar --%>
+    <script type="text/javascript">
+        $(".nav-holder").mCustomScrollbar();
+
+        $(document).ready(function () {
+            DateTime();
+            Time();
+            multiSelectAll();
+            multiSelect();
+        });
+
+    <%-- Multi secim ucun --%>  
+
+        $(function () {
+            $(".chose").chosen({
+                disable_search_threshold: 10,
+                no_results_text: "",
+                width: "100%",
+            });
+        });
+
+        function multiSelect() {
+            $('.multiSelect').multiselect({
+                buttonWidth: '100%',
+            });
+        };
+
+
+        function multiSelectAll() {
+            $('.multiSelectAll').multiselect({
+                buttonWidth: '100%',
+                includeSelectAllOption: true,
+            });
+        };
+
+        function DateTime() {
+            $(".form_datetime").datetimepicker(
+                {
+                    format: "dd.mm.yyyy",
+                    language: 'en',
+                    weekStart: 1,
+                    todayBtn: 1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 2,
+                    minView: 2,
+                    forceParse: 0
+                });
+        };
+
+        function Time() {
+            $(".form_time").datetimepicker(
+                {
+                    format: 'hh:ii',
+                    minuteStep: 5,
+                    autoclose: true,
+                    minView: 0,
+                    maxView: 1,
+                    startView: 1,
+                    todayHighlight: 0,
+                });
+        };
+
+    </script>
+</body>
+</html>

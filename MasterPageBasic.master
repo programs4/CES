@@ -1,0 +1,26 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageBasic.master.cs" Inherits="MasterPageBasic" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>CES | Centralized Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/customscroll.min.css">
+
+    <script type="text/javascript" src="/Js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/Js/bootstrap.js"></script>
+
+    <%="<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/styles.css\">" %>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="AspnetForm" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+        </asp:ContentPlaceHolder>
+
+    </form>
+</body>
+</html>
