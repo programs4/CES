@@ -14,7 +14,7 @@ public class DALC
     {
         get
         {
-            return new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString.Decrypt());
+            return new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString);
         }
     }
 
